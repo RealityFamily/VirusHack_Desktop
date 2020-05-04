@@ -1,0 +1,76 @@
+﻿<Page x:Class="VirusHack_Desktop.Pages.UserInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VirusHack_Desktop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="450"
+      Title="UserInfo">
+
+    <Grid Background="#65A6D1"
+          Margin="0, 0, 0, 7.5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="#0A67A3"
+                        Grid.Row="0">
+            <TextBlock Foreground="#FFFFFF"
+                               Background="Transparent"
+                               Name="InformationLabel"
+                               Text="Информация о пользователе"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
+                               FontWeight="Medium"
+                               Margin="5"/>
+        </Border>
+        <ScrollViewer Grid.Row="1"
+                              Background="Transparent"
+                              VerticalScrollBarVisibility="Hidden">
+            <StackPanel >
+                <TextBlock HorizontalAlignment="Center"
+                           Name="Name"
+                           Text="Мельник Владислав"
+                           Foreground="#2B2B2B"
+                           FontSize="18"
+                           Margin="0, 15, 0, 0"/>
+                <Separator Background="#2B2B2B"
+                           Margin="15">
+                    <Separator.RenderTransform>
+                        <ScaleTransform ScaleY="1"/>
+                    </Separator.RenderTransform>
+                </Separator>
+                <TextBlock HorizontalAlignment="Center"
+                           Name="Group"
+                           Text="ИНБО-01-17"
+                           FontSize="18"
+                           Foreground="#2B2B2B"/>
+                <Separator Name="GroupSeparator"
+                           Background="#2B2B2B"
+                           Margin="15">
+                    <Separator.RenderTransform>
+                        <ScaleTransform ScaleY="1"/>
+                    </Separator.RenderTransform>
+                </Separator>
+                <TextBlock HorizontalAlignment="Center"
+                           Name="Email"
+                           Text="melnik.v.@edu.mirea.ru"
+                           FontSize="18"
+                           Foreground="#2B2B2B"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Button Grid.Row="2"
+                Margin="0"
+                Background="#FF8E00"
+                BorderThickness="0">
+            <TextBlock Text="Выход"
+                       FontSize="36"
+                       FontWeight="Bold"
+                       Foreground="#2B2B2B"/>
+        </Button>
+    </Grid>
+</Page>

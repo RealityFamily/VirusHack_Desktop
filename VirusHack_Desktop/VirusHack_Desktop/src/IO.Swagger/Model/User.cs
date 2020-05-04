@@ -42,13 +42,15 @@ namespace IO.Swagger.Model
         /// <param name="firstName">firstName.</param>
         /// <param name="lastName">lastName.</param>
         /// <param name="email">email.</param>
+        /// <param name="group">group.</param>
         /// <param name="userStatus">userStatus.</param>
-        public User(Guid? id = default(Guid?), string firstName = default(string), string lastName = default(string), string email = default(string), UserStatus? userStatus = default(UserStatus?))
+        public User(Guid? id = default(Guid?), string firstName = default(string), string lastName = default(string), string email = default(string), string group = default(string), UserStatus? userStatus = default(UserStatus?))
         {
             this.Id = id;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Email = email;
+            this.Group = group;
             this.UserStatus = userStatus;
         }
         
@@ -76,6 +78,9 @@ namespace IO.Swagger.Model
         [DataMember(Name="email", EmitDefaultValue=false)]
         public string Email { get; set; }
 
+        [DataMember(Name = "group", EmitDefaultValue = false)]
+        public string Group { get; set; }
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -89,6 +94,7 @@ namespace IO.Swagger.Model
             sb.Append("  FirstName: ").Append(FirstName).Append("\n");
             sb.Append("  LastName: ").Append(LastName).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
+            sb.Append("  Group: ").Append(Group).Append("\n");
             sb.Append("  UserStatus: ").Append(UserStatus).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -143,7 +149,12 @@ namespace IO.Swagger.Model
                     this.Email == input.Email ||
                     (this.Email != null &&
                     this.Email.Equals(input.Email))
-                ) && 
+                ) &&
+                (
+                    this.Group == input.Group ||
+                    (this.Group != null &&
+                    this.Group.Equals(input.Group))
+                ) &&
                 (
                     this.UserStatus == input.UserStatus ||
                     (this.UserStatus != null &&
@@ -168,6 +179,8 @@ namespace IO.Swagger.Model
                     hashCode = hashCode * 59 + this.LastName.GetHashCode();
                 if (this.Email != null)
                     hashCode = hashCode * 59 + this.Email.GetHashCode();
+                if (this.Group != null)
+                    hashCode = hashCode * 59 + this.Group.GetHashCode();
                 if (this.UserStatus != null)
                     hashCode = hashCode * 59 + this.UserStatus.GetHashCode();
                 return hashCode;

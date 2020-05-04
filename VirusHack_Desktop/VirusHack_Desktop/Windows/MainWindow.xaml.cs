@@ -1,5 +1,8 @@
-﻿using System;
+﻿using IO.Swagger.Api;
+using IO.Swagger.Model;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +15,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VirusHack_Desktop.Pages;
 
 namespace VirusHack_Desktop
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : NavigationWindow
     {
         public MainWindow()
         {
@@ -26,7 +30,27 @@ namespace VirusHack_Desktop
 
             if (this.Resources["token"] == null)
             {
-                frame.Navigate(new Auth());
+                Content = new Auth();
+            } else
+            {
+                var apiInstance = new UserApi();
+                string token = this.Resources["token"].ToString();
+                User result = null;
+
+                try
+                {
+                    result = apiInstance.GetUserInfo(token);
+                } catch (Exception e)
+                {
+                    Debug.Print("Exception when calling UserApi.GetUserInfo: " + e.Message);
+                }
+                if (result != null)
+                {
+                    Content = new Week();
+                } else
+                {
+                    Content = new Auth();
+                }
             }
         }
     }

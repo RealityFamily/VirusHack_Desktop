@@ -35,6 +35,8 @@ namespace IO.Swagger.Model
         /// </summary>
         [DataMember(Name="typeLesson", EmitDefaultValue=false)]
         public LessonType? TypeLesson { get; set; }
+        [DataMember(Name = "lessonStatus", EmitDefaultValue = false)]
+        public LessonStatus? LessonStatus { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="Webinar" /> class.
         /// </summary>
@@ -46,8 +48,9 @@ namespace IO.Swagger.Model
         /// <param name="endTime">endTime.</param>
         /// <param name="present">present.</param>
         /// <param name="typeLesson">typeLesson.</param>
+        /// <param name="lessonStatus">lessonStatus.</param>
         /// <param name="files">files.</param>
-        public Webinar(Guid? id = default(Guid?), string discipline = default(string), List<Group> groups = default(List<Group>), User teacher = default(User), DateTime? startTime = default(DateTime?), DateTime? endTime = default(DateTime?), List<User> present = default(List<User>), LessonType? typeLesson = default(LessonType?), List<System.IO.Stream> files = default(List<System.IO.Stream>))
+        public Webinar(Guid? id = default(Guid?), string discipline = default(string), List<Group> groups = default(List<Group>), User teacher = default(User), DateTime? startTime = default(DateTime?), DateTime? endTime = default(DateTime?), List<User> present = default(List<User>), LessonType? typeLesson = default(LessonType?), LessonStatus? lessonStatus = default(LessonStatus?), List<ModelFile> files = default(List<ModelFile>))
         {
             this.Id = id;
             this.Discipline = discipline;
@@ -57,6 +60,7 @@ namespace IO.Swagger.Model
             this.EndTime = endTime;
             this.Present = present;
             this.TypeLesson = typeLesson;
+            this.LessonStatus = lessonStatus;
             this.Files = files;
         }
         
@@ -107,7 +111,7 @@ namespace IO.Swagger.Model
         /// Gets or Sets Files
         /// </summary>
         [DataMember(Name="files", EmitDefaultValue=false)]
-        public List<System.IO.Stream> Files { get; set; }
+        public List<ModelFile> Files { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -125,6 +129,7 @@ namespace IO.Swagger.Model
             sb.Append("  EndTime: ").Append(EndTime).Append("\n");
             sb.Append("  Present: ").Append(Present).Append("\n");
             sb.Append("  TypeLesson: ").Append(TypeLesson).Append("\n");
+            sb.Append("  LessonStatus: ").Append(LessonStatus).Append("\n");
             sb.Append("  Files: ").Append(Files).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -199,7 +204,12 @@ namespace IO.Swagger.Model
                     this.TypeLesson == input.TypeLesson ||
                     (this.TypeLesson != null &&
                     this.TypeLesson.Equals(input.TypeLesson))
-                ) && 
+                ) &&
+                (
+                    this.LessonStatus == input.LessonStatus ||
+                    (this.LessonStatus != null &&
+                    this.TypeLesson.Equals(input.LessonStatus))
+                ) &&
                 (
                     this.Files == input.Files ||
                     this.Files != null &&
@@ -232,6 +242,8 @@ namespace IO.Swagger.Model
                     hashCode = hashCode * 59 + this.Present.GetHashCode();
                 if (this.TypeLesson != null)
                     hashCode = hashCode * 59 + this.TypeLesson.GetHashCode();
+                if (this.LessonStatus != null)
+                    hashCode = hashCode * 59 + this.LessonStatus.GetHashCode();
                 if (this.Files != null)
                     hashCode = hashCode * 59 + this.Files.GetHashCode();
                 return hashCode;

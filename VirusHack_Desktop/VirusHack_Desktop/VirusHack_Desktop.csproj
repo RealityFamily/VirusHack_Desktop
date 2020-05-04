@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\Arrow1.png" />
+    <None Remove="Resources\Images\Arrow2.png" />
     <None Remove="Resources\Images\Ellipse2.png" />
     <None Remove="Resources\Images\Ellipse3.png" />
   </ItemGroup>
@@ -18,6 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\Arrow1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Arrow2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\Ellipse2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

@@ -1,6 +1,6 @@
 # IO.Swagger.Api.WebinApi
 
-All URIs are relative to *http://petstore.swagger.io/v2*
+All URIs are relative to *http://77.50.7.230*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
