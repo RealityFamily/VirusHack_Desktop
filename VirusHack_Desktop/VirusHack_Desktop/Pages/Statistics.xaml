@@ -1,0 +1,78 @@
+﻿<Page x:Class="VirusHack_Desktop.Pages.Statistics"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VirusHack_Desktop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1270"
+      Title="Statistics">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+                      Margin="15, 7.5"
+                      Background="#0A67A3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                               Foreground="#FFFFFF"
+                               FontSize="24"
+                               Text="Время проведенной пары:"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+            <TextBlock Grid.Column="1"
+                               Foreground="#FFFFFF"
+                               FontSize="24"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center">
+                        <Run Name="EndTime"/>
+                        <Run Text="/ 1час 30мин"/>
+            </TextBlock>
+        </Grid>
+        <Grid Grid.Row="1"
+                      Margin="15, 7.5, 15, 15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Background="#0A67A3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                                   Text="Количество присудствовавших студентов:"
+                                   FontSize="24"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   TextWrapping="WrapWithOverflow"
+                                   Foreground="#ffffff"/>
+                <TextBlock Grid.Column="1"
+                                   FontSize="24"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#ffffff">
+                            <Run Name="PresentNum"/>
+                            <Run Text="/ "/>
+                            <Run Name="AllNum"/>
+                            <Run Text=" студентов"/>
+                </TextBlock>
+            </Grid>
+
+            <Border Background="#65A6D1"
+                            Grid.Row="1">
+                <StackPanel x:Name="StudentsContainer"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

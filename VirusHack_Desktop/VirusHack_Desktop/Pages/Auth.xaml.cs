@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IO.Swagger.Api;
+using IO.Swagger.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -23,11 +25,11 @@ namespace VirusHack_Desktop
         {
             InitializeComponent();
 
-            Login.GotFocus += RemoveTextLogin;
-            Login.LostFocus += AddTextLogin;
+            LoginText.GotFocus += RemoveTextLogin;
+            LoginText.LostFocus += AddTextLogin;
 
-            Password.GotFocus += RemoveTextPass;
-            Password.LostFocus += AddTextPass;
+            PasswordText.GotFocus += RemoveTextPass;
+            PasswordText.LostFocus += AddTextPass;
 
             
             
@@ -35,27 +37,46 @@ namespace VirusHack_Desktop
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ((NavigationWindow)Application.Current.MainWindow).Content = new Week();
+            Error.Visibility = Visibility.Collapsed;
+
+            var ApiInstance = new UserApi();
+
+            Login l = new Login(LoginText.Text, PasswordText.Text);
+
+            string token = null;
+
+            try
+            {
+                token = ApiInstance.LoginUser(l).Token;
+            } catch(Exception)
+            {
+                Error.Visibility = Visibility.Visible;
+            }
+
+            if (token != null) {
+                Application.Current.Resources["token"] = token;
+                ((NavigationWindow)Application.Current.MainWindow).Content = new Week(); 
+            }
         }
 
         
         
         public void RemoveTextLogin(object sender, EventArgs e)
         {
-            Login.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#66ffffff"));
+            LoginText.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#66ffffff"));
             LoginError.Visibility = Visibility.Collapsed;
 
-            if (Login.Text == "Ваша почта с доменном @mirea.ru или @edu.mirea.ru")
+            if (LoginText.Text == "Ваша почта с доменном @mirea.ru или @edu.mirea.ru")
             {
-                Login.Text = "";
+                LoginText.Text = "";
             }
         }
 
         public void AddTextLogin(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Login.Text))
-                Login.Text = "Ваша почта с доменном @mirea.ru или @edu.mirea.ru";
-            if (!Login.Text.Contains("@mirea.ru") && !Login.Text.Contains("@edu.mirea.ru"))
+            if (string.IsNullOrWhiteSpace(LoginText.Text))
+                LoginText.Text = "Ваша почта с доменном @mirea.ru или @edu.mirea.ru";
+            if (!LoginText.Text.Contains("@mirea.ru") && !LoginText.Text.Contains("@edu.mirea.ru"))
             {
                 LoginError.Visibility = Visibility.Visible;
             }
@@ -63,18 +84,18 @@ namespace VirusHack_Desktop
 
         public void RemoveTextPass(object sender, EventArgs e)
         {
-            Password.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#66ffffff"));
+            PasswordText.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#66ffffff"));
 
-            if (Password.Text == "Ваш пароль от системы ЦДО")
+            if (PasswordText.Text == "Ваш пароль от системы ЦДО")
             {
-                Password.Text = "";
+                PasswordText.Text = "";
             }
         }
 
         public void AddTextPass(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Password.Text))
-                Password.Text = "Ваш пароль от системы ЦДО";
+            if (string.IsNullOrWhiteSpace(PasswordText.Text))
+                PasswordText.Text = "Ваш пароль от системы ЦДО";
         }
     }
 }

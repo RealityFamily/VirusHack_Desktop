@@ -128,7 +128,7 @@
                     Margin="7.5, 7.5, 15, 15"
                     Background="#FF8E00"
                     Name="WebinarConnection"
-                BorderThickness="0">
+                BorderThickness="0" Click="WebinarConnection_Click">
                 <TextBlock Text="Подключиться к вебинару"
                            FontSize="24"
                            FontWeight="Bold"/>

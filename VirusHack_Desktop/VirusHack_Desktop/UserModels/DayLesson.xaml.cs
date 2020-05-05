@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IO.Swagger.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -18,9 +19,39 @@ namespace VirusHack_Desktop.UserModels
     /// </summary>
     public partial class DayLesson : UserControl
     {
-        public DayLesson()
+        public DayLesson(Webinar webinar)
         {
             InitializeComponent();
+
+            switch (webinar.TypeLesson)
+            {
+                case LessonType.Practic:
+                    Type.Text = "Практическая";
+                    break;
+                case LessonType.Lecture:
+                    Type.Text = "Лекция";
+                    break;
+                case LessonType.Lab:
+                    Type.Text = "Лабораторная";
+                    break;
+                default:
+                    break;
+            }
+
+            switch (webinar.LessonStatus)
+            {
+                case LessonStatus.Future:
+                    background.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#65A6D1"));
+                    break;
+                case LessonStatus.Present:
+                    background.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#96F5F0"));
+                    break;
+                case LessonStatus.Missed:
+                    background.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F08FC5"));
+                    break;
+            }
+
+            Name.Text = webinar.Discipline;
         }
     }
 }

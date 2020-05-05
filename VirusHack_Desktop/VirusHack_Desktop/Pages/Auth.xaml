@@ -24,22 +24,22 @@
                 <DropShadowEffect BlurRadius="5" ShadowDepth="1"/>
             </Border.Effect>
             <StackPanel VerticalAlignment="Center"
-                        Margin="80, 40">
+                        Margin="80, 35">
                 <Border Background="#0A67A3"
                         CornerRadius="31"
-                        Margin="0, 0, 0, 40">
+                        Margin="0, 0, 0, 30">
                     <StackPanel Orientation="Horizontal" Margin="0">
                         <Image Source="/Resources/Images/Ellipse3.png" Margin="0, 0, 20, 0"/>
-                        <TextBox  FontSize="20" Background="Transparent" Foreground="#66ffffff" Name="Login" Text="Ваша почта с доменном @mirea.ru или @edu.mirea.ru" VerticalAlignment="Center" BorderThickness="0"/>
+                        <TextBox  FontSize="20" Background="Transparent" Foreground="#66ffffff" Name="LoginText" Text="Ваша почта с доменном @mirea.ru или @edu.mirea.ru" VerticalAlignment="Center" BorderThickness="0"/>
                     </StackPanel>
                 </Border>
-                <TextBlock Foreground="Red" Text="* Введена почта не с корректным доменом" HorizontalAlignment="Center" Margin="0, 0, 0, 40" FontSize="14" Name="LoginError" Visibility="Collapsed"/>
+                <TextBlock Foreground="Red" Text="* Введена почта не с корректным доменом" HorizontalAlignment="Center" Margin="0, 0, 0, 30" FontSize="14" Name="LoginError" Visibility="Collapsed"/>
                 <Border Background="#0A67A3"
                         CornerRadius="31"
                         Margin="0, 0, 0, 60">
                     <StackPanel Orientation="Horizontal" Margin="0">
                         <Image Source="/Resources/Images/Ellipse2.png" Margin="0, 0, 20, 0"/>
-                        <TextBox  FontSize="20" Background="Transparent" Foreground="#66ffffff" Name="Password" Text="Ваш пароль от системы ЦДО" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0"/>
+                        <TextBox  FontSize="20" Background="Transparent" Foreground="#66ffffff" Name="PasswordText" Text="Ваш пароль от системы ЦДО" VerticalAlignment="Center" HorizontalAlignment="Stretch" BorderThickness="0"/>
                     </StackPanel>
                 </Border>
                 <Button Width="250"
@@ -58,6 +58,7 @@
                         <DropShadowEffect BlurRadius="5" ShadowDepth="1"/>
                     </Button.Effect>
                 </Button>
+                <TextBlock Foreground="Red" Text="* Произошла ошибка при входе" HorizontalAlignment="Center" Margin="0, 20, 0, 0" FontSize="14" Name="Error" Visibility="Collapsed"/>
             </StackPanel>
         </Border>
         

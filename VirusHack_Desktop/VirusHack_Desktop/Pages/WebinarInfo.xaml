@@ -37,7 +37,69 @@
             <ScrollViewer Grid.Row="1"
                               Background="Transparent"
                               VerticalScrollBarVisibility="Hidden">
-
+                <StackPanel >
+                    <TextBlock HorizontalAlignment="Center"
+                           Name="Type"
+                           Text="Лекция"
+                           Foreground="#2B2B2B"
+                           FontSize="18"
+                           Margin="0, 15, 0, 0"/>
+                    <Separator Background="#2B2B2B"
+                           Margin="15">
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="1"/>
+                        </Separator.RenderTransform>
+                    </Separator>
+                    <TextBlock HorizontalAlignment="Center"
+                           Name="Discipline"
+                           Text="Математический Анализ"
+                           FontSize="18"
+                           Foreground="#2B2B2B"
+                           TextWrapping="WrapWithOverflow"/>
+                    <Separator Background="#2B2B2B"
+                           Margin="15">
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="1"/>
+                        </Separator.RenderTransform>
+                    </Separator>
+                    <TextBlock HorizontalAlignment="Center"
+                           Name="Teacher"
+                           Text="Чекалкин Н.С."
+                           FontSize="18"
+                           Foreground="#2B2B2B"/>
+                    <Separator Background="#2B2B2B"
+                           Margin="15">
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="1"/>
+                        </Separator.RenderTransform>
+                    </Separator>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock HorizontalAlignment="Center"
+                                   Name="StartTimeDate"
+                                   Text="09.05.2020"
+                                   FontSize="18"
+                                   Foreground="#2B2B2B"
+                                   Grid.Column="0"/>
+                        <TextBlock HorizontalAlignment="Center"
+                                   Name="StartTimeTime"
+                                   Text="09:00"
+                                   FontSize="18"
+                                   Foreground="#2B2B2B"
+                                   Grid.Column="1"/>
+                    </Grid>
+                    <Separator Background="#2B2B2B"
+                           Margin="15">
+                        <Separator.RenderTransform>
+                            <ScaleTransform ScaleY="1"/>
+                        </Separator.RenderTransform>
+                    </Separator>
+                    <StackPanel x:Name="GroupsContainer"
+                                HorizontalAlignment="Center"/>
+                </StackPanel>
             </ScrollViewer>
         </Grid>
 

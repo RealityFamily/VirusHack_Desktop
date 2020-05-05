@@ -41,6 +41,7 @@ namespace IO.Swagger.Model
         /// Initializes a new instance of the <see cref="Webinar" /> class.
         /// </summary>
         /// <param name="id">id.</param>
+        /// <param name="participationId">participationId.</param>
         /// <param name="discipline">discipline.</param>
         /// <param name="groups">groups.</param>
         /// <param name="teacher">teacher.</param>
@@ -50,9 +51,10 @@ namespace IO.Swagger.Model
         /// <param name="typeLesson">typeLesson.</param>
         /// <param name="lessonStatus">lessonStatus.</param>
         /// <param name="files">files.</param>
-        public Webinar(Guid? id = default(Guid?), string discipline = default(string), List<Group> groups = default(List<Group>), User teacher = default(User), DateTime? startTime = default(DateTime?), DateTime? endTime = default(DateTime?), List<User> present = default(List<User>), LessonType? typeLesson = default(LessonType?), LessonStatus? lessonStatus = default(LessonStatus?), List<ModelFile> files = default(List<ModelFile>))
+        public Webinar(Guid? id = default(Guid?), string participationId = default(string), string discipline = default(string), List<Group> groups = default(List<Group>), User teacher = default(User), DateTime? startTime = default(DateTime?), DateTime? endTime = default(DateTime?), List<User> present = default(List<User>), LessonType? typeLesson = default(LessonType?), LessonStatus? lessonStatus = default(LessonStatus?), List<ModelFile> files = default(List<ModelFile>))
         {
             this.Id = id;
+            this.ParticipationID = participationId;
             this.Discipline = discipline;
             this.Groups = groups;
             this.Teacher = teacher;
@@ -69,6 +71,12 @@ namespace IO.Swagger.Model
         /// </summary>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public Guid? Id { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Discipline
+        /// </summary>
+        [DataMember(Name = "participationId", EmitDefaultValue = false)]
+        public string ParticipationID { get; set; }
 
         /// <summary>
         /// Gets or Sets Discipline
@@ -122,6 +130,7 @@ namespace IO.Swagger.Model
             var sb = new StringBuilder();
             sb.Append("class Webinar {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  ParticipationID: ").Append(ParticipationID).Append("\n");
             sb.Append("  Discipline: ").Append(Discipline).Append("\n");
             sb.Append("  Groups: ").Append(Groups).Append("\n");
             sb.Append("  Teacher: ").Append(Teacher).Append("\n");
@@ -169,7 +178,12 @@ namespace IO.Swagger.Model
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
-                ) && 
+                ) &&
+                (
+                    this.ParticipationID == input.ParticipationID ||
+                    (this.ParticipationID != null &&
+                    this.ParticipationID.Equals(input.ParticipationID))
+                ) &&
                 (
                     this.Discipline == input.Discipline ||
                     (this.Discipline != null &&
@@ -228,6 +242,8 @@ namespace IO.Swagger.Model
                 int hashCode = 41;
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
+                if (this.ParticipationID != null)
+                    hashCode = hashCode * 59 + this.ParticipationID.GetHashCode();
                 if (this.Discipline != null)
                     hashCode = hashCode * 59 + this.Discipline.GetHashCode();
                 if (this.Groups != null)

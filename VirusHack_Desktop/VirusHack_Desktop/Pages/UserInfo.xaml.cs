@@ -34,5 +34,10 @@ namespace VirusHack_Desktop.Pages
             }
             Email.Text = user.Email;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ((NavigationWindow)Application.Current.MainWindow).Navigate(new Auth());
+        }
     }
 }

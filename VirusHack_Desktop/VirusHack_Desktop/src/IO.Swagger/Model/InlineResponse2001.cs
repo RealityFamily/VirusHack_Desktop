@@ -34,9 +34,10 @@ namespace IO.Swagger.Model
         /// Initializes a new instance of the <see cref="InlineResponse2001" /> class.
         /// </summary>
         /// <param name="link">link.</param>
-        public InlineResponse2001(string link = default(string))
+        public InlineResponse2001(string link = default(string), string participationID = default(string))
         {
             this.Link = link;
+            this.ParticipationID = participationID;
         }
         
         /// <summary>
@@ -44,6 +45,11 @@ namespace IO.Swagger.Model
         /// </summary>
         [DataMember(Name="link", EmitDefaultValue=false)]
         public string Link { get; set; }
+        /// <summary>
+        /// Gets or Sets Link
+        /// </summary>
+        [DataMember(Name = "participationid", EmitDefaultValue = false)]
+        public string ParticipationID { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -54,6 +60,7 @@ namespace IO.Swagger.Model
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2001 {\n");
             sb.Append("  Link: ").Append(Link).Append("\n");
+            sb.Append("  ParticipationID: ").Append(ParticipationID).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -89,9 +96,14 @@ namespace IO.Swagger.Model
 
             return 
                 (
-                    this.Link == input.Link ||
+                    (this.Link == input.Link ||
                     (this.Link != null &&
-                    this.Link.Equals(input.Link))
+                    this.Link.Equals(input.Link)))
+                    &&
+                    (this.ParticipationID == input.ParticipationID ||
+                    (this.ParticipationID != null &&
+                    this.ParticipationID.Equals(input.ParticipationID)))
+
                 );
         }
 
@@ -106,6 +118,8 @@ namespace IO.Swagger.Model
                 int hashCode = 41;
                 if (this.Link != null)
                     hashCode = hashCode * 59 + this.Link.GetHashCode();
+                if (this.ParticipationID != null)
+                    hashCode = hashCode * 59 + this.ParticipationID.GetHashCode();
                 return hashCode;
             }
         }

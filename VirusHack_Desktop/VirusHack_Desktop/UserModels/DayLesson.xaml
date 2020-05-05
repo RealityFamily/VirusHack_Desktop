@@ -6,9 +6,17 @@
              xmlns:local="clr-namespace:VirusHack_Desktop.UserModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border>
-        <StackPanel>
-            
-        </StackPanel>
+    <Border x:Name="background">
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+            <Run Name="Type"
+                 FontWeight="Bold"
+                 FontSize="24"
+                 Text="Практика"/>
+            <Run Text=" "/>
+            <Run Name="Name"
+                 FontSize="24"
+                 Text="Архитектура ВМиС"/>
+        </TextBlock>
     </Border>
 </UserControl>

@@ -1,6 +1,6 @@
 # IO.Swagger.Api.UserApi
 
-All URIs are relative to *http://77.50.7.230*
+All URIs are relative to *http://380b125a.ngrok.io/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

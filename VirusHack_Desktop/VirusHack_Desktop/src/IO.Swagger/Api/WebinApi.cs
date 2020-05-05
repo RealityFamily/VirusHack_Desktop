@@ -70,6 +70,29 @@ namespace IO.Swagger.Api
         /// <returns>ApiResponse of InlineResponse2001</returns>
         ApiResponse<InlineResponse2001> GetWebinarConnectionWithHttpInfo (string token, Guid? webinarId);
         /// <summary>
+        /// Получение ссылки на подключения к вебинару.
+        /// </summary>
+        /// <remarks>
+        /// Выгрузка файлов вебинара преподавателем и администратором по ID вебинара с подверждением авторизации через token.
+        /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
+        /// <param name="webinarId">Индетификатор вебинара, по которому желаем выгрузить файл.</param>
+        /// <returns>InlineResponse2001</returns>
+        InlineResponse2001 GetWebinarDisconnection(string token, string participationId);
+
+        /// <summary>
+        /// Получение ссылки на подключения к вебинару.
+        /// </summary>
+        /// <remarks>
+        /// Выгрузка файлов вебинара преподавателем и администратором по ID вебинара с подверждением авторизации через token.
+        /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
+        /// <param name="webinarId">Индетификатор вебинара, по которому желаем выгрузить файл.</param>
+        /// <returns>ApiResponse of InlineResponse2001</returns>
+        ApiResponse<InlineResponse2001> GetWebinarDisconnectionWithHttpInfo(string token, string participationId);
+        /// <summary>
         /// Получение файла вебинара пользователем.
         /// </summary>
         /// <remarks>
@@ -232,6 +255,29 @@ namespace IO.Swagger.Api
         /// <param name="webinarId">Индетификатор вебинара, по которому желаем выгрузить файл.</param>
         /// <returns>Task of ApiResponse (InlineResponse2001)</returns>
         System.Threading.Tasks.Task<ApiResponse<InlineResponse2001>> GetWebinarConnectionAsyncWithHttpInfo (string token, Guid? webinarId);
+        /// <summary>
+        /// Получение ссылки на подключения к вебинару.
+        /// </summary>
+        /// <remarks>
+        /// Выгрузка файлов вебинара преподавателем и администратором по ID вебинара с подверждением авторизации через token.
+        /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
+        /// <param name="webinarId">Индетификатор вебинара, по которому желаем выгрузить файл.</param>
+        /// <returns>Task of InlineResponse2001</returns>
+        System.Threading.Tasks.Task<InlineResponse2001> GetWebinarDisconnectionAsync(string token, string participationId);
+
+        /// <summary>
+        /// Получение ссылки на подключения к вебинару.
+        /// </summary>
+        /// <remarks>
+        /// Выгрузка файлов вебинара преподавателем и администратором по ID вебинара с подверждением авторизации через token.
+        /// </remarks>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
+        /// <param name="webinarId">Индетификатор вебинара, по которому желаем выгрузить файл.</param>
+        /// <returns>Task of ApiResponse (InlineResponse2001)</returns>
+        System.Threading.Tasks.Task<ApiResponse<InlineResponse2001>> GetWebinarDisconnectionAsyncWithHttpInfo(string token, string participationId);
         /// <summary>
         /// Получение файла вебинара пользователем.
         /// </summary>
@@ -725,6 +771,144 @@ namespace IO.Swagger.Api
             return new ApiResponse<InlineResponse2001>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (InlineResponse2001) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2001)));
+        }
+
+        public InlineResponse2001 GetWebinarDisconnection(string token, string participationId)
+        {
+            ApiResponse<InlineResponse2001> localVarResponse = GetWebinarDisconnectionWithHttpInfo(token, participationId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Получение ссылки на подключения к вебинару. Выгрузка файлов вебинара преподавателем и администратором по ID вебинара с подверждением авторизации через token.
+        /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
+        /// <param name="webinarId">Индетификатор вебинара, по которому желаем выгрузить файл.</param>
+        /// <returns>ApiResponse of InlineResponse2001</returns>
+        public ApiResponse<InlineResponse2001> GetWebinarDisconnectionWithHttpInfo(string token, string participationId)
+        {
+            // verify the required parameter 'token' is set
+            if (token == null)
+                throw new ApiException(400, "Missing required parameter 'token' when calling WebinApi->GetWebinarDisconnection");
+            // verify the required parameter 'webinarId' is set
+            if (participationId == null)
+                throw new ApiException(400, "Missing required parameter 'webinarId' when calling WebinApi->GetWebinarDisconnection");
+
+            var localVarPath = "/webin/{participation_id}/delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (participationId != null) localVarPathParams.Add("participation_id", this.Configuration.ApiClient.ParameterToString(participationId)); // path parameter
+            if (token != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetWebinarDisconnection", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<InlineResponse2001>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (InlineResponse2001)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2001)));
+        }
+
+        /// <summary>
+        /// Получение ссылки на подключения к вебинару. Выгрузка файлов вебинара преподавателем и администратором по ID вебинара с подверждением авторизации через token.
+        /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
+        /// <param name="webinarId">Индетификатор вебинара, по которому желаем выгрузить файл.</param>
+        /// <returns>Task of InlineResponse2001</returns>
+        public async System.Threading.Tasks.Task<InlineResponse2001> GetWebinarDisconnectionAsync(string token, string participationId)
+        {
+            ApiResponse<InlineResponse2001> localVarResponse = await GetWebinarDisconnectionAsyncWithHttpInfo(token, participationId);
+            return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Получение ссылки на подключения к вебинару. Выгрузка файлов вебинара преподавателем и администратором по ID вебинара с подверждением авторизации через token.
+        /// </summary>
+        /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
+        /// <param name="webinarId">Индетификатор вебинара, по которому желаем выгрузить файл.</param>
+        /// <returns>Task of ApiResponse (InlineResponse2001)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<InlineResponse2001>> GetWebinarDisconnectionAsyncWithHttpInfo(string token, string participationId)
+        {
+            // verify the required parameter 'token' is set
+            if (token == null)
+                throw new ApiException(400, "Missing required parameter 'token' when calling WebinApi->GetWebinarDisconnection");
+            // verify the required parameter 'webinarId' is set
+            if (participationId == null)
+                throw new ApiException(400, "Missing required parameter 'webinarId' when calling WebinApi->GetWebinarDisconnection");
+
+            var localVarPath = "/webin/{participation_id}/delete";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (participationId != null) localVarPathParams.Add("participation_id", this.Configuration.ApiClient.ParameterToString(participationId)); // path parameter
+            if (token != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetWebinarDisconnection", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<InlineResponse2001>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (InlineResponse2001)this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2001)));
         }
 
         /// <summary>

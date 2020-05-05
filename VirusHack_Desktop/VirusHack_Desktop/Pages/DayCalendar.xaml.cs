@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IO.Swagger.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -10,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VirusHack_Desktop.UserModels;
 
 namespace VirusHack_Desktop.Pages
 {
@@ -18,7 +20,7 @@ namespace VirusHack_Desktop.Pages
     /// </summary>
     public partial class DayCalendar : Page
     {
-        public DayCalendar()
+        public DayCalendar(List<Webinar> webinars, DateTime dt)
         {
             InitializeComponent();
 
@@ -37,7 +39,6 @@ namespace VirusHack_Desktop.Pages
                     b.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#65A6D1"));
                     LessonsContainer.Children.Add(b);
                 }
-                // heh
                 Border b1 = new Border();
                 Grid.SetRow(b1, i * 12);
                 Grid.SetRowSpan(b1, 12);
@@ -99,6 +100,20 @@ namespace VirusHack_Desktop.Pages
                     Text = time
                 };
                 LessonsContainer.Children.Add(b1);
+            }
+
+            foreach(Webinar webinar in webinars)
+            {
+                if (webinar.StartTime.HasValue)
+                {
+                    if (webinar.StartTime.Value.Date == dt.Date)
+                    {
+                        DayLesson dl = new DayLesson(webinar);
+                        Grid.SetRow(dl, (webinar.StartTime.Value.Hour - 9) * 12 + ((webinar.StartTime.Value.Minute) / 5) );
+                        Grid.SetRowSpan(dl, 18);
+                        LessonsContainer.Children.Add(dl);
+                    }
+                }
             }
         }
     }

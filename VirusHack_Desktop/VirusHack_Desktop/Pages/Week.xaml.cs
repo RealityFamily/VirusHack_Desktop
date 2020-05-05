@@ -1,4 +1,5 @@
-﻿using IO.Swagger.Model;
+﻿using IO.Swagger.Api;
+using IO.Swagger.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VirusHack_Desktop.Windows;
 
 namespace VirusHack_Desktop.Pages
 {
@@ -21,33 +23,61 @@ namespace VirusHack_Desktop.Pages
     public partial class Week : Page
     {
         List<Webinar> webinars = new List<Webinar>();
+        Webinar localWebinar = new Webinar();
+        User user = new User();
         DateTime localDateTime = DateTime.Now;
         bool weekendView = true;
+        bool webinInfo = true;
 
         public Week()
         {
             InitializeComponent();
 
-            InfoBlock.Navigate(new WebinarInfo(new Webinar()
+            var WebinarApiInstance = new WebinApi();
+            var UserApiInstance = new UserApi();
+            try
             {
-                Files = new List<ModelFile>()
-            }));
+                string token = Application.Current.Resources["token"].ToString();
+                user = UserApiInstance.GetUserInfo(token);
+                webinars = WebinarApiInstance.GetWeekWebinars(token);
+            } catch (Exception e) { }
+
+            AccountName.Text = user.LastName + " " + user.FirstName;
+
+            localWebinar = FindCurrentWebinar(webinars);
+            InfoBlock.Navigate(new WebinarInfo(localWebinar));
 
             CalendarView.Navigate(new WeekCalendar(webinars, localDateTime));
             Date.Text = StartOfWeek(localDateTime).ToString("dd") + " - " + EndOfWeek(localDateTime).ToString("dd") + " " + localDateTime.ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
             weekNum.Text = WeekNum(localDateTime) + " неделя";
         }
 
+        private Webinar FindCurrentWebinar(List<Webinar> webinars)
+        {
+            foreach (Webinar webinar in webinars)
+            {
+                DateTime tempH = webinar.StartTime.Value.AddHours(1);
+                DateTime tempM = webinar.StartTime.Value.AddMinutes(30);
+
+                if (DateTime.Equals(webinar.StartTime.Value.Date, DateTime.Now.Date) &&
+                    (new DateTime(0, 0, 0, DateTime.Now.Hour, DateTime.Now.Minute, 0) >= new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) &&
+                        new DateTime(0, 0, 0, DateTime.Now.Hour, DateTime.Now.Minute, 0) < new DateTime(0, 0, 0, tempH.Hour, tempM.Minute, 0)))
+                {
+                    return webinar;
+                }
+            }
+            return new Webinar();
+        }
+
         private void AccountInfo_Click(object sender, RoutedEventArgs e)
         {
-            InfoBlock.Navigate(new UserInfo(new User()
+            if (webinInfo) {
+                InfoBlock.Navigate(new UserInfo(user));
+            } else
             {
-                FirstName = "Владислав",
-                LastName = "Мельник",
-                Email = "melnik.v.@edu.mirea.ru",
-                Group = "ИНБО-01-17",
-                UserStatus = UserStatus.Student
-            }));
+                InfoBlock.Navigate(new WebinarInfo(localWebinar));
+            }
+            webinInfo = !webinInfo;
         }
 
         private DateTime StartOfWeek(DateTime dt)
@@ -94,7 +124,7 @@ namespace VirusHack_Desktop.Pages
             } else
             {
                 localDateTime = localDateTime.AddDays(1);
-                CalendarView.Navigate(new DayCalendar());
+                CalendarView.Navigate(new DayCalendar(webinars, localDateTime));
                 Date.Text = localDateTime.ToString("dd") + " " + localDateTime.ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
             }
             weekNum.Text = WeekNum(localDateTime) + " неделя";
@@ -111,7 +141,7 @@ namespace VirusHack_Desktop.Pages
             else
             {
                 localDateTime = localDateTime.AddDays(-1);
-                CalendarView.Navigate(new DayCalendar());
+                CalendarView.Navigate(new DayCalendar(webinars, localDateTime));
                 Date.Text = localDateTime.ToString("dd") + " " + localDateTime.ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
             }
             weekNum.Text = WeekNum(localDateTime) + " неделя";
@@ -128,7 +158,7 @@ namespace VirusHack_Desktop.Pages
 
             Date.Text = localDateTime.ToString("dd") + " " + localDateTime.ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
             weekNum.Text = WeekNum(localDateTime) + " неделя";
-            CalendarView.Navigate(new DayCalendar());
+            CalendarView.Navigate(new DayCalendar(webinars, localDateTime));
 
             WeekView.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF8E00"));
             WeekView.Foreground = new SolidColorBrush((Color) ColorConverter.ConvertFromString("#000000"));
@@ -149,6 +179,44 @@ namespace VirusHack_Desktop.Pages
 
             DayView.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF8E00"));
             DayView.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#000000"));
+        }
+
+        public void OpenWebinarInfo(Webinar webinar)
+        {
+            webinInfo = true;
+            localWebinar = webinar;
+            InfoBlock.Navigate(new WebinarInfo(webinar));
+        }
+
+        public void OpenWebinarStatics(Webinar webinar)
+        {
+            var WebinarApiInstance = new WebinApi();
+            Webinar webinar_staistic = webinar;
+
+            try
+            {
+                webinar_staistic = WebinarApiInstance.GetWebinarStatic(Application.Current.Resources["token"].ToString(), webinar.Id);
+            } catch (Exception exc) { }
+
+            ((NavigationWindow)Application.Current.MainWindow).Navigate(new WebinarStatistic(webinar_staistic));
+        }
+
+        private void WebinarConnection_Click(object sender, RoutedEventArgs e)
+        {
+            var WebinarApiInstance = new WebinApi();
+            string link = "";
+            string pID = "";
+            try
+            {
+                var response = WebinarApiInstance.GetWebinarConnection(Application.Current.Resources["token"].ToString(), localWebinar.Id.Value);
+                link = response.Link;
+                pID = response.ParticipationID;
+            } catch (Exception ex) { }
+
+            if (!string.IsNullOrWhiteSpace(link) && !string.IsNullOrWhiteSpace(pID)) {
+                BrowserWindow bw = new BrowserWindow(link, pID);
+                bw.Show();
+            }
         }
     }
 }

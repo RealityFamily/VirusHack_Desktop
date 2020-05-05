@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VirusHack_Desktop.Pages;
 
 namespace VirusHack_Desktop.UserModels
 {
@@ -19,9 +20,13 @@ namespace VirusHack_Desktop.UserModels
     /// </summary>
     public partial class WeekLesson : UserControl
     {
+        Webinar webin;
+
         public WeekLesson(Webinar webinar)
         {
             InitializeComponent();
+
+            this.webin = webinar;
 
             switch (webinar.TypeLesson)
             {
@@ -53,6 +58,16 @@ namespace VirusHack_Desktop.UserModels
 
             Name.Text = webinar.Discipline;
 
+        }
+
+        private void background_Click(object sender, RoutedEventArgs e)
+        {
+            ((Week)Application.Current.MainWindow.Content).OpenWebinarInfo(webin);
+        }
+
+        private void background_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ((Week)Application.Current.MainWindow.Content).OpenWebinarStatics(webin);
         }
     }
 }

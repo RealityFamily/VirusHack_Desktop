@@ -112,45 +112,48 @@ namespace VirusHack_Desktop.Pages
                             break;
                     }
 
-                    if (new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(0, 0, 0, 9, 0, 0) && 
-                        new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(0, 0, 0, 10, 30, 0))
+                    if (new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 9, 0, 0) && 
+                        new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 10, 30, 0))
                     {
                         Grid.SetRow(wl, 1);
-                    } else if (new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(0, 0, 0, 10, 40, 0) &&
-                        new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(0, 0, 0, 12, 10, 0))
+                    } else if (new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 10, 40, 0) &&
+                        new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 12, 10, 0))
                     {
                         Grid.SetRow(wl, 2);
                     }
-                    else if (new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(0, 0, 0, 13, 10, 0) &&
-                        new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(0, 0, 0, 14, 40, 0))
+                    else if (new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 13, 10, 0) &&
+                        new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 14, 40, 0))
                     {
                         Grid.SetRow(wl, 3);
                     }
-                    else if (new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(0, 0, 0, 14, 50, 0) &&
-                        new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(0, 0, 0, 16, 20, 0))
+                    else if (new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 14, 50, 0) &&
+                        new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 16, 20, 0))
                     {
                         Grid.SetRow(wl, 4);
                     }
-                    else if (new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(0, 0, 0, 16, 30, 0) &&
-                        new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(0, 0, 0, 18, 0, 0))
+                    else if (new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 16, 30, 0) &&
+                        new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 18, 0, 0))
                     {
                         Grid.SetRow(wl, 5);
                     }
-                    else if (new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(0, 0, 0, 18, 10, 0) &&
-                        new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(0, 0, 0, 19, 40, 0))
+                    else if (new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 18, 10, 0) &&
+                        new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 19, 40, 0))
                     {
                         Grid.SetRow(wl, 6);
                     }
-                    else if (new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(0, 0, 0, 18, 30, 0) &&
-                        new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(0, 0, 0, 20, 0, 0))
+                    else if (new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 18, 30, 0) &&
+                        new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 20, 0, 0))
                     {
                         Grid.SetRow(wl, 7);
                     }
-                    else if (new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(0, 0, 0, 20, 10, 0) &&
-                        new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(0, 0, 0, 21, 40, 0))
+                    else if (new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) > new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 20, 10, 0) &&
+                        new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) < new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, 21, 40, 0))
                     {
                         Grid.SetRow(wl, 8);
                     }
+
+                    wl.VerticalAlignment = VerticalAlignment.Stretch;
+                    wl.HorizontalAlignment = HorizontalAlignment.Stretch;
 
                     lessonsContainers.Children.Add(wl);
                 }

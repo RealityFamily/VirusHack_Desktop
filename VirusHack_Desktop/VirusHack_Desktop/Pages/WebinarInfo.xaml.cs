@@ -24,10 +24,47 @@ namespace VirusHack_Desktop.Pages
         {
             InitializeComponent();
 
-            foreach (ModelFile file in webinar.Files)
+            switch (webinar.TypeLesson)
             {
-                FileLine fl = new FileLine(file.Name, file.Link);
-                FilesList.Children.Add(fl);
+                case LessonType.Practic:
+                    Type.Text = "Практическая работа";
+                    break;
+                case LessonType.Lecture:
+                    Type.Text = "Лекция";
+                    break;
+                case LessonType.Lab:
+                    Type.Text = "Лабораторная работа";
+                    break;
+            }
+            Discipline.Text = webinar.Discipline;
+            if (webinar.Teacher != null) {
+                Teacher.Text = webinar.Teacher.LastName + " " + webinar.Teacher.FirstName[0] + ".";
+            }
+            if (webinar.StartTime.HasValue) {
+                StartTimeDate.Text = webinar.StartTime.Value.Date.ToString("dd.MM.yyyy");
+                StartTimeTime.Text = webinar.StartTime.Value.ToString("HH:mm");
+            }
+
+            if (webinar.Groups != null)
+            {
+                foreach (Group group in webinar.Groups)
+                {
+                    TextBlock tb = new TextBlock()
+                    {
+                        FontSize = 18,
+                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2b2b2b")),
+                        Text = group.Name
+                    };
+                    GroupsContainer.Children.Add(tb);
+                }
+            }
+
+            if (webinar.Files != null) {
+                foreach (ModelFile file in webinar.Files)
+                {
+                    FileLine fl = new FileLine(file.Name, file.Link);
+                    FilesList.Children.Add(fl);
+                }
             }
         }
     }
