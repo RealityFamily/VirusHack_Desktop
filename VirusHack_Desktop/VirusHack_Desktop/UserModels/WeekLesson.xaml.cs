@@ -1,4 +1,5 @@
-﻿using IO.Swagger.Model;
+﻿using IO.Swagger.Api;
+using IO.Swagger.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,13 +21,13 @@ namespace VirusHack_Desktop.UserModels
     /// </summary>
     public partial class WeekLesson : UserControl
     {
-        Webinar webin;
+        Webinar webinar;
 
         public WeekLesson(Webinar webinar)
         {
             InitializeComponent();
 
-            this.webin = webinar;
+            this.webinar = webinar;
 
             switch (webinar.TypeLesson)
             {
@@ -62,12 +63,19 @@ namespace VirusHack_Desktop.UserModels
 
         private void background_Click(object sender, RoutedEventArgs e)
         {
-            ((Week)Application.Current.MainWindow.Content).OpenWebinarInfo(webin);
+            ((Week)Application.Current.MainWindow.Content).OpenWebinarInfo(webinar);
         }
 
         private void background_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ((Week)Application.Current.MainWindow.Content).OpenWebinarStatics(webin);
+            var UserApiInstance = new UserApi();
+            User localUser = UserApiInstance.GetUserInfo(Application.Current.Resources["token"].ToString());
+            if (localUser.UserStatus != UserStatus.Student)
+            {
+                var WebinarApiInstance = new WebinApi();
+                Webinar statisWebinar = WebinarApiInstance.GetWebinarStatic(Application.Current.Resources["token"].ToString(), webinar.Id);
+                ((Week)Application.Current.MainWindow.Content).OpenWebinarStatics(statisWebinar);
+            }
         }
     }
 }

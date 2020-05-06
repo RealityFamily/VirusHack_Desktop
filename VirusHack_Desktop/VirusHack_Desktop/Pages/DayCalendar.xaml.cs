@@ -111,6 +111,7 @@ namespace VirusHack_Desktop.Pages
                         DayLesson dl = new DayLesson(webinar);
                         Grid.SetRow(dl, (webinar.StartTime.Value.Hour - 9) * 12 + ((webinar.StartTime.Value.Minute) / 5) );
                         Grid.SetRowSpan(dl, 18);
+                        Grid.SetColumn(dl, 1);
                         LessonsContainer.Children.Add(dl);
                     }
                 }

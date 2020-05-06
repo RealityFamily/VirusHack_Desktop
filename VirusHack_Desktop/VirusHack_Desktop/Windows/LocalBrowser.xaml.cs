@@ -1,5 +1,4 @@
 ﻿using IO.Swagger.Api;
-using IO.Swagger.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,17 +14,17 @@ using System.Windows.Shapes;
 namespace VirusHack_Desktop.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для BrowserWindow.xaml
+    /// Логика взаимодействия для LocalBrowser.xaml
     /// </summary>
-    public partial class BrowserWindow : Window
+    public partial class LocalBrowser : Window
     {
         string pID = "";
 
-        public BrowserWindow(string link, string participationId)
+        public LocalBrowser(string link, string participationId)
         {
             InitializeComponent();
 
-            browser.Address = link;
+            browser.Navigate(link);
             this.pID = participationId;
         }
 
@@ -35,7 +34,8 @@ namespace VirusHack_Desktop.Windows
             try
             {
                 WebinarApiInstance.GetWebinarDisconnection(Application.Current.Resources["token"].ToString(), pID);
-            } catch (Exception ex) { }
+            }
+            catch (Exception ex) { }
         }
     }
 }

@@ -34,7 +34,7 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>List&lt;Webinar&gt;</returns>
-        List<Webinar> GetDayWebinars (string token);
+        List<Webinar> GetDayWebinars (string token, DateTime date);
 
         /// <summary>
         /// Получение перечня вебинаров на день пользователем.
@@ -45,7 +45,7 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>ApiResponse of List&lt;Webinar&gt;</returns>
-        ApiResponse<List<Webinar>> GetDayWebinarsWithHttpInfo (string token);
+        ApiResponse<List<Webinar>> GetDayWebinarsWithHttpInfo (string token, DateTime date);
         /// <summary>
         /// Получение ссылки на подключения к вебинару.
         /// </summary>
@@ -172,7 +172,7 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>List&lt;Webinar&gt;</returns>
-        List<Webinar> GetWeekWebinars (string token);
+        List<Webinar> GetWeekWebinars (string token, DateTime date);
 
         /// <summary>
         /// Получение перечня вебинаров на неделю пользователем.
@@ -183,7 +183,7 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>ApiResponse of List&lt;Webinar&gt;</returns>
-        ApiResponse<List<Webinar>> GetWeekWebinarsWithHttpInfo (string token);
+        ApiResponse<List<Webinar>> GetWeekWebinarsWithHttpInfo (string token, DateTime date);
         /// <summary>
         /// Выгрузка файлов вебинара преподавателем.
         /// </summary>
@@ -220,7 +220,7 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>Task of List&lt;Webinar&gt;</returns>
-        System.Threading.Tasks.Task<List<Webinar>> GetDayWebinarsAsync (string token);
+        System.Threading.Tasks.Task<List<Webinar>> GetDayWebinarsAsync (string token, DateTime date);
 
         /// <summary>
         /// Получение перечня вебинаров на день пользователем.
@@ -231,7 +231,7 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>Task of ApiResponse (List&lt;Webinar&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<Webinar>>> GetDayWebinarsAsyncWithHttpInfo (string token);
+        System.Threading.Tasks.Task<ApiResponse<List<Webinar>>> GetDayWebinarsAsyncWithHttpInfo (string token, DateTime date);
         /// <summary>
         /// Получение ссылки на подключения к вебинару.
         /// </summary>
@@ -358,7 +358,7 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>Task of List&lt;Webinar&gt;</returns>
-        System.Threading.Tasks.Task<List<Webinar>> GetWeekWebinarsAsync (string token);
+        System.Threading.Tasks.Task<List<Webinar>> GetWeekWebinarsAsync (string token, DateTime date);
 
         /// <summary>
         /// Получение перечня вебинаров на неделю пользователем.
@@ -369,7 +369,7 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>Task of ApiResponse (List&lt;Webinar&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<Webinar>>> GetWeekWebinarsAsyncWithHttpInfo (string token);
+        System.Threading.Tasks.Task<ApiResponse<List<Webinar>>> GetWeekWebinarsAsyncWithHttpInfo (string token, DateTime date);
         /// <summary>
         /// Выгрузка файлов вебинара преподавателем.
         /// </summary>
@@ -501,9 +501,9 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>List&lt;Webinar&gt;</returns>
-        public List<Webinar> GetDayWebinars (string token)
+        public List<Webinar> GetDayWebinars (string token, DateTime date)
         {
-             ApiResponse<List<Webinar>> localVarResponse = GetDayWebinarsWithHttpInfo(token);
+             ApiResponse<List<Webinar>> localVarResponse = GetDayWebinarsWithHttpInfo(token, date);
              return localVarResponse.Data;
         }
 
@@ -513,13 +513,13 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>ApiResponse of List&lt;Webinar&gt;</returns>
-        public ApiResponse< List<Webinar> > GetDayWebinarsWithHttpInfo (string token)
+        public ApiResponse< List<Webinar> > GetDayWebinarsWithHttpInfo (string token, DateTime date)
         {
             // verify the required parameter 'token' is set
             if (token == null)
                 throw new ApiException(400, "Missing required parameter 'token' when calling WebinApi->GetDayWebinars");
 
-            var localVarPath = "/webin/day";
+            var localVarPath = "/webin/{date}/day";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -540,6 +540,7 @@ namespace IO.Swagger.Api
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
+            if (date != null) localVarPathParams.Add("date", this.Configuration.ApiClient.ParameterToString(date)); //path parameter
             if (token != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
 
 
@@ -567,9 +568,9 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>Task of List&lt;Webinar&gt;</returns>
-        public async System.Threading.Tasks.Task<List<Webinar>> GetDayWebinarsAsync (string token)
+        public async System.Threading.Tasks.Task<List<Webinar>> GetDayWebinarsAsync (string token, DateTime date)
         {
-             ApiResponse<List<Webinar>> localVarResponse = await GetDayWebinarsAsyncWithHttpInfo(token);
+             ApiResponse<List<Webinar>> localVarResponse = await GetDayWebinarsAsyncWithHttpInfo(token, date);
              return localVarResponse.Data;
 
         }
@@ -580,13 +581,13 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>Task of ApiResponse (List&lt;Webinar&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<Webinar>>> GetDayWebinarsAsyncWithHttpInfo (string token)
+        public async System.Threading.Tasks.Task<ApiResponse<List<Webinar>>> GetDayWebinarsAsyncWithHttpInfo (string token, DateTime date)
         {
             // verify the required parameter 'token' is set
             if (token == null)
                 throw new ApiException(400, "Missing required parameter 'token' when calling WebinApi->GetDayWebinars");
 
-            var localVarPath = "/webin/day";
+            var localVarPath = "/webin/{date}/day";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -607,6 +608,7 @@ namespace IO.Swagger.Api
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
+            if (date != null) localVarPathParams.Add("date", this.Configuration.ApiClient.ParameterToString(date)); //path parameter
             if (token != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
 
 
@@ -1362,9 +1364,9 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>List&lt;Webinar&gt;</returns>
-        public List<Webinar> GetWeekWebinars (string token)
+        public List<Webinar> GetWeekWebinars (string token, DateTime date)
         {
-             ApiResponse<List<Webinar>> localVarResponse = GetWeekWebinarsWithHttpInfo(token);
+             ApiResponse<List<Webinar>> localVarResponse = GetWeekWebinarsWithHttpInfo(token, date);
              return localVarResponse.Data;
         }
 
@@ -1374,13 +1376,13 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>ApiResponse of List&lt;Webinar&gt;</returns>
-        public ApiResponse< List<Webinar> > GetWeekWebinarsWithHttpInfo (string token)
+        public ApiResponse< List<Webinar> > GetWeekWebinarsWithHttpInfo (string token, DateTime date)
         {
             // verify the required parameter 'token' is set
             if (token == null)
                 throw new ApiException(400, "Missing required parameter 'token' when calling WebinApi->GetWeekWebinars");
 
-            var localVarPath = "/webin";
+            var localVarPath = "/webin/{date}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1401,6 +1403,7 @@ namespace IO.Swagger.Api
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
+            if (date != null) localVarPathParams.Add("date", this.Configuration.ApiClient.ParameterToString(date)); // path parameter
             if (token != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
 
 
@@ -1428,9 +1431,9 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>Task of List&lt;Webinar&gt;</returns>
-        public async System.Threading.Tasks.Task<List<Webinar>> GetWeekWebinarsAsync (string token)
+        public async System.Threading.Tasks.Task<List<Webinar>> GetWeekWebinarsAsync (string token, DateTime date)
         {
-             ApiResponse<List<Webinar>> localVarResponse = await GetWeekWebinarsAsyncWithHttpInfo(token);
+             ApiResponse<List<Webinar>> localVarResponse = await GetWeekWebinarsAsyncWithHttpInfo(token, date);
              return localVarResponse.Data;
 
         }
@@ -1441,13 +1444,13 @@ namespace IO.Swagger.Api
         /// <exception cref="IO.Swagger.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="token">Токен пользователя, выданный при аутентификации.</param>
         /// <returns>Task of ApiResponse (List&lt;Webinar&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<Webinar>>> GetWeekWebinarsAsyncWithHttpInfo (string token)
+        public async System.Threading.Tasks.Task<ApiResponse<List<Webinar>>> GetWeekWebinarsAsyncWithHttpInfo (string token, DateTime date)
         {
             // verify the required parameter 'token' is set
             if (token == null)
                 throw new ApiException(400, "Missing required parameter 'token' when calling WebinApi->GetWeekWebinars");
 
-            var localVarPath = "/webin";
+            var localVarPath = "/webin/{date}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1468,6 +1471,7 @@ namespace IO.Swagger.Api
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
+            if (date != null) localVarPathParams.Add("date", this.Configuration.ApiClient.ParameterToString(date)); // path parameter
             if (token != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "token", token)); // query parameter
 
 

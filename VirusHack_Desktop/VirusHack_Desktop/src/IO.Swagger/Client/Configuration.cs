@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace IO.Swagger.Client
 {
@@ -115,7 +116,7 @@ namespace IO.Swagger.Client
         public Configuration()
         {
             UserAgent = "Swagger-Codegen/1.0.0/csharp";
-            BasePath = "http://380b125a.ngrok.io/";
+            BasePath = "http://77.50.7.230:5000/";
             DefaultHeader = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
             ApiKeyPrefix = new ConcurrentDictionary<string, string>();
@@ -131,7 +132,7 @@ namespace IO.Swagger.Client
             IDictionary<string, string> defaultHeader,
             IDictionary<string, string> apiKey,
             IDictionary<string, string> apiKeyPrefix,
-            string basePath = "http://380b125a.ngrok.io/") : this()
+            string basePath = "http://77.50.7.230:5000/") : this()
         {
             if (string.IsNullOrWhiteSpace(basePath))
                 throw new ArgumentException("The provided basePath is invalid.", "basePath");

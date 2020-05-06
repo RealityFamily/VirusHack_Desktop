@@ -48,7 +48,7 @@ namespace VirusHack_Desktop
             try
             {
                 token = ApiInstance.LoginUser(l).Token;
-            } catch(Exception)
+            } catch(Exception ex)
             {
                 Error.Visibility = Visibility.Visible;
             }

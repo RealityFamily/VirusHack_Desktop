@@ -131,7 +131,9 @@
                 BorderThickness="0" Click="WebinarConnection_Click">
                 <TextBlock Text="Подключиться к вебинару"
                            FontSize="24"
-                           FontWeight="Bold"/>
+                           FontWeight="Bold"
+                           TextWrapping="WrapWithOverflow"
+                           TextAlignment="Center"/>
             </Button>
         </Grid>
     </Grid>

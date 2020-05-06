@@ -28,18 +28,21 @@ namespace VirusHack_Desktop.Pages
         DateTime localDateTime = DateTime.Now;
         bool weekendView = true;
         bool webinInfo = true;
+        WebinApi WebinarApiInstance;
+        UserApi UserApiInstance;
+        string token;
 
         public Week()
         {
             InitializeComponent();
 
-            var WebinarApiInstance = new WebinApi();
-            var UserApiInstance = new UserApi();
+            WebinarApiInstance = new WebinApi();
+            UserApiInstance = new UserApi();
             try
             {
-                string token = Application.Current.Resources["token"].ToString();
+                token = Application.Current.Resources["token"].ToString();
                 user = UserApiInstance.GetUserInfo(token);
-                webinars = WebinarApiInstance.GetWeekWebinars(token);
+                webinars = WebinarApiInstance.GetWeekWebinars(token, StartOfWeek(localDateTime));
             } catch (Exception e) { }
 
             AccountName.Text = user.LastName + " " + user.FirstName;
@@ -60,8 +63,8 @@ namespace VirusHack_Desktop.Pages
                 DateTime tempM = webinar.StartTime.Value.AddMinutes(30);
 
                 if (DateTime.Equals(webinar.StartTime.Value.Date, DateTime.Now.Date) &&
-                    (new DateTime(0, 0, 0, DateTime.Now.Hour, DateTime.Now.Minute, 0) >= new DateTime(0, 0, 0, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) &&
-                        new DateTime(0, 0, 0, DateTime.Now.Hour, DateTime.Now.Minute, 0) < new DateTime(0, 0, 0, tempH.Hour, tempM.Minute, 0)))
+                    (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0) >= new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, webinar.StartTime.Value.Hour, webinar.StartTime.Value.Minute, 0) &&
+                        new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, 0) < new DateTime(webinar.StartTime.Value.Year, webinar.StartTime.Value.Month, webinar.StartTime.Value.Day, tempH.Hour, tempM.Minute, 0)))
                 {
                     return webinar;
                 }
@@ -119,11 +122,21 @@ namespace VirusHack_Desktop.Pages
         {
             if (weekendView) {
                 localDateTime = localDateTime.AddDays(7);
+                try
+                {
+                    webinars = WebinarApiInstance.GetWeekWebinars(token, StartOfWeek(localDateTime));
+                }
+                catch (Exception ex) { }
                 CalendarView.Navigate(new WeekCalendar(webinars, localDateTime));
                 Date.Text = StartOfWeek(localDateTime).ToString("dd") + " - " + EndOfWeek(localDateTime).ToString("dd") + " " + localDateTime.ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
             } else
             {
                 localDateTime = localDateTime.AddDays(1);
+                try
+                {
+                    webinars = WebinarApiInstance.GetDayWebinars(token, localDateTime.Date);
+                } catch (Exception ex) { }
+
                 CalendarView.Navigate(new DayCalendar(webinars, localDateTime));
                 Date.Text = localDateTime.ToString("dd") + " " + localDateTime.ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
             }
@@ -135,12 +148,22 @@ namespace VirusHack_Desktop.Pages
             if (weekendView)
             {
                 localDateTime = localDateTime.AddDays(-7);
+                try
+                {
+                    webinars = WebinarApiInstance.GetWeekWebinars(token, StartOfWeek(localDateTime));
+                }
+                catch (Exception ex) { }
                 CalendarView.Navigate(new WeekCalendar(webinars, localDateTime));
                 Date.Text = StartOfWeek(localDateTime).ToString("dd") + " - " + EndOfWeek(localDateTime).ToString("dd") + " " + localDateTime.ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
             }
             else
             {
                 localDateTime = localDateTime.AddDays(-1);
+                try
+                {
+                    webinars = WebinarApiInstance.GetDayWebinars(token, localDateTime.Date);
+                }
+                catch (Exception ex) { }
                 CalendarView.Navigate(new DayCalendar(webinars, localDateTime));
                 Date.Text = localDateTime.ToString("dd") + " " + localDateTime.ToString("MMMM", CultureInfo.GetCultureInfo("ru-ru"));
             }
@@ -150,6 +173,11 @@ namespace VirusHack_Desktop.Pages
         private void DayView_Click(object sender, RoutedEventArgs e)
         {
             localDateTime = DateTime.Now;
+            try
+            {
+                webinars = WebinarApiInstance.GetDayWebinars(token, localDateTime.Date);
+            }
+            catch (Exception ex) { }
 
             weekendView = false;
 
@@ -167,6 +195,11 @@ namespace VirusHack_Desktop.Pages
         private void WeekView_Click(object sender, RoutedEventArgs e)
         {
             localDateTime = DateTime.Now;
+            try
+            {
+                webinars = WebinarApiInstance.GetWeekWebinars(token, StartOfWeek(localDateTime));
+            }
+            catch (Exception ex) { }
 
             weekendView = true;
 
@@ -190,12 +223,11 @@ namespace VirusHack_Desktop.Pages
 
         public void OpenWebinarStatics(Webinar webinar)
         {
-            var WebinarApiInstance = new WebinApi();
             Webinar webinar_staistic = webinar;
 
             try
             {
-                webinar_staistic = WebinarApiInstance.GetWebinarStatic(Application.Current.Resources["token"].ToString(), webinar.Id);
+                webinar_staistic = WebinarApiInstance.GetWebinarStatic(token, webinar.Id);
             } catch (Exception exc) { }
 
             ((NavigationWindow)Application.Current.MainWindow).Navigate(new WebinarStatistic(webinar_staistic));
@@ -203,19 +235,25 @@ namespace VirusHack_Desktop.Pages
 
         private void WebinarConnection_Click(object sender, RoutedEventArgs e)
         {
-            var WebinarApiInstance = new WebinApi();
             string link = "";
             string pID = "";
             try
             {
-                var response = WebinarApiInstance.GetWebinarConnection(Application.Current.Resources["token"].ToString(), localWebinar.Id.Value);
+                var response = WebinarApiInstance.GetWebinarConnection(token, localWebinar.Id.Value);
                 link = response.Link;
                 pID = response.ParticipationID;
             } catch (Exception ex) { }
 
             if (!string.IsNullOrWhiteSpace(link) && !string.IsNullOrWhiteSpace(pID)) {
-                BrowserWindow bw = new BrowserWindow(link, pID);
-                bw.Show();
+                try
+                {
+                    BrowserWindow bw = new BrowserWindow(link, pID);
+                    bw.Show();
+                } catch (Exception ex) //Нужно разобраться и подключить Chromium Browser
+                {
+                    LocalBrowser browser = new LocalBrowser(link, pID);
+                    browser.Show();
+                }
             }
         }
     }
