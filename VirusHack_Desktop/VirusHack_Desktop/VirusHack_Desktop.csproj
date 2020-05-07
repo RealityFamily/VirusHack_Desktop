@@ -23,6 +23,22 @@
     <PackageReference Include="RestSharp" Version="106.10.1" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Reference Include="CefSharp.BrowserSubprocess.Core">
+      <HintPath>StaticLibs\CefSharp.BrowserSubprocess.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp">
+      <HintPath>StaticLibs\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core">
+      <HintPath>StaticLibs\CefSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Wpf">
+      <HintPath>StaticLibs\CefSharp.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
   <ItemGroup>
     <Resource Include="Resources\Images\Arrow1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

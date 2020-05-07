@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -27,6 +28,20 @@ namespace VirusHack_Desktop.Pages
 
             this.webin = webinar;
             contentContainer.Navigate(new Statistics(webinar));
+
+            slideRight();
+        }
+
+        private async void slideRight()
+        {
+            while (ContentColumn.Width.Value < (Container.Width * 0.8))
+            {
+                ContentColumn.Width = new GridLength(ContentColumn.Width.Value + 1);
+                if (ContentColumn.Width.Value % 20 == 0)
+                {
+                    await Task.Delay(10);
+                }
+            }
         }
 
         private void StatisticButton_Click(object sender, RoutedEventArgs e)

@@ -32,9 +32,13 @@ namespace VirusHack_Desktop.Pages
             }
 
             int AllSum = 0;
-            foreach (Group group in webinar.Groups)
-            {
-                AllSum += group.Students.Count;
+            if (webinar.Groups != null) {
+                foreach (Group group in webinar.Groups)
+                {
+                    if (group.Students != null) {
+                        AllSum += group.Students.Count;
+                    }
+                }  
             }
             AllNum.Text = AllSum.ToString();
 

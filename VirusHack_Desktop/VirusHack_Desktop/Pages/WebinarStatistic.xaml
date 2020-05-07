@@ -8,10 +8,11 @@
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="WebinarStatistic">
 
-    <Grid>
+    <Grid Background="Transparent"
+          Name="Container">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition x:Name="ContentColumn"/>
+            <ColumnDefinition x:Name="BackgroungColumn"/>
         </Grid.ColumnDefinitions>
         <Border Background="#898989"
                 Grid.Column="0">

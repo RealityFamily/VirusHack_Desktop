@@ -73,7 +73,11 @@ namespace VirusHack_Desktop.UserModels
             if (localUser.UserStatus != UserStatus.Student)
             {
                 var WebinarApiInstance = new WebinApi();
-                Webinar statisWebinar = WebinarApiInstance.GetWebinarStatic(Application.Current.Resources["token"].ToString(), webinar.Id);
+                Webinar statisWebinar = webinar;
+                try
+                {
+                    statisWebinar = WebinarApiInstance.GetWebinarStatic(Application.Current.Resources["token"].ToString(), webinar.Id);
+                } catch (Exception ex) { }
                 ((Week)Application.Current.MainWindow.Content).OpenWebinarStatics(statisWebinar);
             }
         }
